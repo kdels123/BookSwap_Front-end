@@ -1,25 +1,37 @@
 #appSearch{
     position: absolute;
-    top: 50%;
+    top: 40%;
     left:50%;
     transform: translate(-50%,-50%);
 }
 
-
 #appTitle{
     position: absolute;
-    top: 25%;
-    left:45%;
+    top: 20%;
+    left:47%;
+    transform: translate(-50%,-50%);
+    font-weight: bold;
+}
+
+#appSubtitle{
+    position: absolute;
+    top: 27%;
+    left:50%;
     transform: translate(-50%,-50%);
     font-weight: bold;
 }
 
 #appIcon{
     position: absolute;
-    top: 25%;
-    left:55%;
+    top: 20%;
+    left:57%;
     transform: translate(-50%,-50%);
     font-weight: bold;
+}
+
+
+#searchSubtitle{
+    font-size: 12px;
 }
 
 #appLoginRegister{

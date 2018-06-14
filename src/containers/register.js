@@ -111,8 +111,9 @@ class Register extends React.Component {
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label" style={{fontSize: 13.5}}>Already a Member?</label>
                         <div className="col-sm-10">
-                            <button type="button"
-                                    className="btn btn-secondary btn-block">Login</button>
+                            <Link
+                                className="btn btn-secondary btn-block mb-2"
+                                to={{pathname: '/bookswap/login'}}>Login</Link>
                         </div>
                     </div>
                 </form>

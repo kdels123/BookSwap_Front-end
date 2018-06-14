@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 class Login extends React.Component {
@@ -33,7 +34,9 @@ class Login extends React.Component {
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">Not yet a Member?</label>
                         <div className="col-sm-10">
-                            <button type="button" className="btn btn-secondary btn-block">Register</button>
+                            <Link
+                                className="btn btn-secondary btn-block mb-2"
+                                to={{pathname: '/bookswap/register'}}>Register</Link>
                         </div>
                     </div>
                 </form>

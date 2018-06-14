@@ -1,6 +1,7 @@
 const API_URL = 'http://localhost:8080/api/user';
 const BOOK_API_TITLE_URL = 'https://www.googleapis.com/books/v1/volumes?q=&BOOKTITLE&&key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
-const BOOK_API_URL = 'https://www.googleapis.com/books/v1/volumes?q=harrypotter+inauthor:rowling&key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
+const BOOK_API_AUTHOR_URL = 'https://www.googleapis.com/books/v1/volumes?q=+inauthor:&BOOKAUTHOR&&key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
+const BOOK_API_TITLE_AUTHOR_URL = 'https://www.googleapis.com/books/v1/volumes?q=&BOOKTITLE&+inauthor:&BOOKAUTHOR&&key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
 
 let _singleton = Symbol();
 export default class APIService {
@@ -9,8 +10,22 @@ export default class APIService {
             throw new Error('Singleton!!!');
     }
 
-    findAllResults(title) {
+    findResultsByTitle(title) {
         return fetch(BOOK_API_TITLE_URL.replace('&BOOKTITLE&', title))
+            .then(function (response) {
+                return response.json()
+            })
+    }
+
+    findResultsByAuthor(author) {
+        return fetch(BOOK_API_AUTHOR_URL.replace('&BOOKAUTHOR&', author))
+            .then(function (response) {
+                return response.json()
+            })
+    }
+
+    findResultsByTitleAuthor(title, author) {
+        return fetch(BOOK_API_TITLE_AUTHOR_URL.replace('&BOOKTITLE&', title).replace('&BOOKAUTHOR&', author))
             .then(function (response) {
                 return response.json()
             })

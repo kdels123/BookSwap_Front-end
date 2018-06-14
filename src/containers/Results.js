@@ -22,9 +22,28 @@ class Results extends React.Component {
                 (result, i) => {
                     return (
                         <li>
-                        <span key={i}>{result.volumeInfo.title}, {result.volumeInfo.authors}</span>
+                            <span key={i}>{result.volumeInfo.title}, {result.volumeInfo.authors}</span>
+                            <br/>
                             <br/>
                             <img src ={result.volumeInfo.imageLinks.thumbnail} />
+                            <br/>
+                            <br/>
+                            <span>
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary btn-sm">
+                                    Own It?
+                                    </button>
+                                &nbsp;
+                                &nbsp;
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary btn-sm">
+                                    Find It!
+                                    </button>
+                         </span>
+                            <br/>
+                            <br/>
                         </li>
                     )});
         }
