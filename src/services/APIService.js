@@ -15,7 +15,7 @@ export default class APIService {
                 return response.json()
             })
     }
-    
+
 
     static get instance() {
         if(!this[_singleton])

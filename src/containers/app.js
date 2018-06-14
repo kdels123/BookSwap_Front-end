@@ -33,12 +33,10 @@ class App extends React.Component {
     }
 
     findResults() {
-
-        insertTile();
-
         console.log(this);
+        console.log(this.state.title);
         if(this.state) {
-            this.APIService.findAllResults()
+            this.APIService.findAllResults(this.state.title)
                 .then((results) => {this.setResults(results)})
         }
         console.log(this.state.results);

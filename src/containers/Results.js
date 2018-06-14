@@ -21,7 +21,11 @@ class Results extends React.Component {
             data = this.state.results.results.items.map(
                 (result, i) => {
                     return (
-                        <div key={i}>{result.volumeInfo.title}</div>
+                        <li>
+                        <span key={i}>{result.volumeInfo.title}, {result.volumeInfo.authors}</span>
+                            <br/>
+                            <img src ={result.volumeInfo.imageLinks.thumbnail} />
+                        </li>
                     )});
         }
         return (
