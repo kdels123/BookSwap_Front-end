@@ -9,13 +9,29 @@
 #appTitle{
     position: absolute;
     top: 25%;
-    left:50%;
+    left:45%;
     transform: translate(-50%,-50%);
     font-weight: bold;
 }
 
-#appLogin{
+#appIcon{
+    position: absolute;
+    top: 25%;
+    left:55%;
+    transform: translate(-50%,-50%);
+    font-weight: bold;
+}
+
+#appLoginRegister{
     text-align: right;
     margin-top: 1%;
-    margin-right: 5%;
+    margin-right: 1%;
+}
+
+#loginLayout {
+    position: absolute;
+    top: 40%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-weight: bold;
 }
