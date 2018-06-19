@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import APIService from "../services/APIService";
-import SearchResult from '../components/SearchResult'
 
 document.body.style.backgroundColor = "lightgrey"
 // document.body.style.backgroundImage = "url('https://www.cambridgema.gov/~/media/Images/Traffic/residentpermitphotocontest/2017/Library_Kathleen_Delsener.jpg?mw=450&mh=334')"
@@ -17,7 +16,6 @@ class App extends React.Component {
 
         this.setTitle = this.setTitle.bind(this);
         this.setAuthor = this.setAuthor.bind(this);
-        this.renderSearchResults = this.renderSearchResults.bind(this);
         this.setResults = this.setResults.bind(this);
         this.findResults = this.findResults.bind(this);
         this.APIService = APIService.instance;
@@ -40,9 +38,7 @@ class App extends React.Component {
     }
 
     findResults() {
-
-        var popupS = require('popups');
-
+        
         console.log(this);
         console.log(this.state.title);
 
@@ -64,19 +60,6 @@ class App extends React.Component {
         console.log(this.state.results);
     }
 
-    renderSearchResults() {
-        let data = null;
-        if (this.state.results) {
-            data = this.state.results.items.map(
-                (result, i) => {
-                    return (
-                        <SearchResult key={i} title={result.volumeInfo.title}/>
-                    )});
-        }
-        return (
-            data
-        )
-    }
 
     render() {
         return (

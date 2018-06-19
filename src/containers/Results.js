@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Results extends React.Component {
     constructor(props) {
@@ -8,13 +9,6 @@ class Results extends React.Component {
         }
     }
 
-    componentDidMount() {
-        console.log(this.state.results);
-        console.log(this.state.results.results.items);
-        // this.setResults(this.props.location.state);
-        // this.renderSearchResults();
-    }
-
     renderSearchResults() {
         let data = null;
         if (this.state.results) {
@@ -22,7 +16,12 @@ class Results extends React.Component {
                 (result, i) => {
                     return (
                         <li>
-                            <span key={i}>{result.volumeInfo.title}, {result.volumeInfo.authors}</span>
+                            <Link
+                                // className="btn btn-primary mb-2"
+                                to={{
+                                    pathname: '/bookswap/results/book',
+                                    state: {id: result.id}
+                                }}>{result.volumeInfo.title}, {result.volumeInfo.authors}</Link>
                             <br/>
                             <br/>
                             <img src ={result.volumeInfo.imageLinks.thumbnail} />

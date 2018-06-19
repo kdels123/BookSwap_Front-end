@@ -1,4 +1,5 @@
 const API_URL = 'http://localhost:8080/api/user';
+const BOOK_API_ID = 'https://www.googleapis.com/books/v1/volumes/&ID&?key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
 const BOOK_API_TITLE_URL = 'https://www.googleapis.com/books/v1/volumes?q=&BOOKTITLE&&key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
 const BOOK_API_AUTHOR_URL = 'https://www.googleapis.com/books/v1/volumes?q=+inauthor:&BOOKAUTHOR&&key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
 const BOOK_API_TITLE_AUTHOR_URL = 'https://www.googleapis.com/books/v1/volumes?q=&BOOKTITLE&+inauthor:&BOOKAUTHOR&&key=AIzaSyDTJ0K6Dc69o38GsHeSkU7O0XBIXYZ2FYQ'
@@ -29,6 +30,12 @@ export default class APIService {
             .then(function (response) {
                 return response.json()
             })
+    }
+
+    findBookByID(bookId) {
+        return fetch (BOOK_API_ID.replace('&ID&', bookId)).then(function (response){
+            return response.json()
+        })
     }
 
 
