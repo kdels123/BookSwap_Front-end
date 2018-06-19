@@ -15,33 +15,29 @@ class Results extends React.Component {
             data = this.state.results.results.items.map(
                 (result, i) => {
                     return (
-                        <li>
-                            <Link
+                        <li class="list-group-item">
+                            Title: <Link
                                 // className="btn btn-primary mb-2"
                                 to={{
                                     pathname: '/bookswap/results/book',
                                     state: {id: result.id}
-                                }}>{result.volumeInfo.title}, {result.volumeInfo.authors}</Link>
+                                }}>{result.volumeInfo.title}</Link>
                             <br/>
+                            Author: {result.volumeInfo.authors[0]}
+                            <br/>
+                            Rating: {result.volumeInfo.averageRating}/5
                             <br/>
                             <img src ={result.volumeInfo.imageLinks.thumbnail} />
                             <br/>
                             <br/>
-                            <span>
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary btn-sm">
-                                    Own It?
-                                    </button>
-                                &nbsp;
-                                &nbsp;
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary btn-sm">
-                                    Find It!
-                                    </button>
-                         </span>
-                            <br/>
+                                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div className="btn-group mr-2" role="group" aria-label="First group">
+                                          <button type="button" className="btn btn-secondary btn-sm">Own It?</button>
+                                    </div>
+                                    <div className="btn-group mr-2" role="group" aria-label="Second group">
+                                        <button type="button" className="btn btn-secondary btn-sm">Find It!</button>
+                                    </div>
+                                </div>
                             <br/>
                         </li>
                     )});
@@ -54,7 +50,9 @@ class Results extends React.Component {
     render() {
         return (
             <div className="container-fluid">
+                <ul class="list-group list-group-flush">
                 {this.renderSearchResults()}
+                </ul>
             </div>
         )
     }

@@ -29,12 +29,22 @@ class ResultDetail extends React.Component {
             bookResults = this.state.bookResults
             return (
                 <div className={"container-fluid"}>
-                    <h1>{bookResults.volumeInfo.title}</h1>
-                    <h2>By: {bookResults.volumeInfo.authors[0]}</h2>
-                    <img src ={bookResults.volumeInfo.imageLinks.small} />
-                    <p>{bookResults.volumeInfo.description}</p>
-                    <br/>
-                    <br/>
+                    <br style={{lineHeight: 0.5}}/>
+                    <h2>{bookResults.volumeInfo.title} ({bookResults.volumeInfo.averageRating}/5)</h2>
+                    <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div className="btn-group mr-2" role="group" aria-label="First group">
+                            <button type="button" className="btn btn-secondary">Own It?</button>
+                        </div>
+                        <div className="btn-group mr-2" role="group" aria-label="Second group">
+                            <button type="button" className="btn btn-secondary">Find It!</button>
+                        </div>
+                    </div>
+                    <h3>By: {bookResults.volumeInfo.authors[0]}</h3>
+                    <h3>Published: {bookResults.volumeInfo.publishedDate.substring(0, 4)}</h3>
+                    <div>
+                    <img src ={bookResults.volumeInfo.imageLinks.small} className="float-left" style={{paddingRight: 10}}/>
+                    <p id="descriptionText" className="text-left">{bookResults.volumeInfo.description}</p>
+                    </div>
                 </div>
             )};
         return (
@@ -43,17 +53,7 @@ class ResultDetail extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <div id="appLoginRegister">
-                    <Link to={'/bookswap/search'}>
-                        Home
-                    </Link>
-                    &nbsp;
-                    &nbsp;
-                    <Link to={'/bookswap/search'}>
-                        Search
-                    </Link>
-                </div>
+            <div className="container">
                 <h1>{this.renderBookResults()}</h1>
             </div>
         )

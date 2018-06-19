@@ -1,10 +1,3 @@
-#appSearch{
-    position: absolute;
-    top: 40%;
-    left:50%;
-    transform: translate(-50%,-50%);
-}
-
 #homeTitle{
     position: absolute;
     top: 20%;
@@ -33,16 +26,14 @@
     font-size: 12px;
 }
 
-#appLoginRegister{
-    text-align: right;
-    margin-top: 1%;
-    margin-right: 1%;
-}
-
 #loginLayout {
     position: absolute;
     top: 40%;
     left:50%;
     transform: translate(-50%,-50%);
     font-weight: bold;
+}
+
+#descriptionText {
+    font-size: medium;
 }
