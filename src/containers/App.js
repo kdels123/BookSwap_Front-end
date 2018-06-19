@@ -12,11 +12,13 @@ class App extends React.Component {
                 <nav className="navbar navbar-expand navbar-dark bg-primary">
                     <span>
 
-                    <a className="navbar-brand" href="#">
+                    <Link
+                        to={{pathname: '/bookswap/home'}}
+                        className="navbar-brand">
                         BookSwap
                         <i className="fa fa-book fa-2x d-inline-block align-top" id="appIcon2"></i>
 
-                    </a>
+                    </Link>
 
                     </span>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -28,7 +30,9 @@ class App extends React.Component {
 
                         </ul>
                         <span className="navbar-text">
-                            <a className="nav-link" href="#">Profile</a>
+                            <Link
+                                className="nav-link"
+                                to={{pathname: '/bookswap/profile'}}>Profile</Link>
                         </span>
                         <span className="navbar-text">
                             <Link

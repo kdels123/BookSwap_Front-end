@@ -49,7 +49,6 @@ class Register extends React.Component {
         }
     }
 
-
     render() {
         return (
             <div className="container w-75 p-3" id="loginLayout">
