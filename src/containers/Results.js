@@ -54,7 +54,6 @@ class Results extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <h1>Results!</h1>
                 {this.renderSearchResults()}
             </div>
         )

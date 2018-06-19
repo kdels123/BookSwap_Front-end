@@ -5,38 +5,38 @@ document.body.style.backgroundColor = "lightgrey"
 // document.body.style.backgroundImage = "url('https://www.cambridgema.gov/~/media/Images/Traffic/residentpermitphotocontest/2017/Library_Kathleen_Delsener.jpg?mw=450&mh=334')"
 
 class Home extends React.Component {
-    constructor() {
-        super();
-        this.state={
-            title: '',
-            author: '',
-            results: []
-        }
-    }
 
     render() {
         return (
             <div className="container-fluid">
                 <div>
-                    <div id="appLoginRegister">
-                        <Link to={'/bookswap/login'}>
-                            Login
-                        </Link>
-                        &nbsp;
-                        &nbsp;
-                        <Link to={'/bookswap/register'}>
-                            Register
-                        </Link>
-                    </div>
-                    <i className="fa fa-book fa-3x" id="appIcon"></i>
-                    <h1 id="appTitle">BookSwap</h1>
+                    <h1 id="homeTitle">
+                        BookSwap
+                        <i className="fa fa-book fa-2x d-inline-block align-top"></i>
+                        </h1>
                     <br/>
-                    <p id="appSubtitle">Your Neighborhood Library, Without the Late Fees</p>
+                    <p id="homeSubtitle">Your Neighborhood Library, Without the Late Fees</p>
                 </div>
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    id="searchButton">Search For Books!</button>
+
+
+                <form id="searchButton">
+                    <div className="form-group" >
+                        <Link
+                            className="btn btn-block btn-primary mb-2"
+                            to={{pathname: '/bookswap/login'}}>Login</Link>
+                    </div>
+                    <div className="form-group">
+                        <Link
+                            className="btn btn-block btn-primary mb-2"
+                            to={{pathname: '/bookswap/register'}}>Register</Link>
+                    </div>
+
+                    <div className="form-group">
+                        <Link
+                            className="btn btn-primary mb-2"
+                            to={{pathname: '/bookswap/search'}}>Search For Books!</Link>
+                    </div>
+                </form>
             </div>
         )
     }

@@ -6,8 +6,9 @@ import './style.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
-import Home from './containers/Home'
 import App from './containers/App'
+import Home from './containers/Home'
+import Search from './containers/Search'
 import Login from './containers/Login'
 import Register from './containers/Register'
 import Results from './containers/Results'
@@ -17,8 +18,9 @@ import ResultDetail from './containers/ResultDetail'
 ReactDOM.render(
     <Router>
         <div className="container-fluid">
+            <Route path="/bookswap/" component={App}/>
             <Route path="/bookswap/home" component={Home}/>
-            <Route path="/bookswap/search" component={App}/>
+            <Route path="/bookswap/search" component={Search}/>
             <Route path="/bookswap/login" component={Login}/>
             <Route path="/bookswap/register" component={Register}/>
             <Route path="/bookswap/search/results" component={Results}/>
