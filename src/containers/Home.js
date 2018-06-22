@@ -8,7 +8,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid">
+            <div className="container">
                 <div>
                     <h1 id="homeTitle">
                         BookSwap

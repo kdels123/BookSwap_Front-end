@@ -32,10 +32,11 @@ class Results extends React.Component {
                             <br/>
                                 <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                     <div className="btn-group mr-2" role="group" aria-label="First group">
-                                          <button type="button" className="btn btn-secondary btn-sm">Own It?</button>
+                                          <Link to={{pathname: '/bookswap/profile'}}
+                                                 className="btn btn-secondary btn-sm">Own It?</Link>
                                     </div>
                                     <div className="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button type="button" className="btn btn-secondary btn-sm">Find It!</button>
+                                        <Link to={{pathname: '/bookswap/request'}}className="btn btn-secondary btn-sm">Find It!</Link>
                                     </div>
                                 </div>
                             <br/>

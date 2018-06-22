@@ -14,6 +14,7 @@ import Login from './containers/Login'
 import Register from './containers/Register'
 import Results from './containers/Results'
 import ResultDetail from './containers/ResultDetail'
+import Request from './containers/Request'
 
 
 ReactDOM.render(
@@ -27,6 +28,7 @@ ReactDOM.render(
             <Route path="/bookswap/register" component={Register}/>
             <Route path="/bookswap/search/results" component={Results}/>
             <Route path="/bookswap/results/book" component={ResultDetail}/>
+            <Route path="/bookswap/request" component={Request}/>
         </div>
     </Router>,
     document.getElementById('root')

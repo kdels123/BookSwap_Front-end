@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import UserService from '../services/UserService'
+import GiverService from '../services/GiverService'
+import ReceiverService from '../services/ReceiverService'
+import AdminService from '../services/AdminService'
+
 
 
 class Register extends React.Component {
@@ -10,22 +13,24 @@ class Register extends React.Component {
             username: '',
             email: '',
             password: '',
-            verify: ''
+            verify: '',
+            userType: '',
         };
 
         this.setUsername = this.setUsername.bind(this);
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
         this.setVerify = this.setVerify.bind(this);
+        this.setUserType = this.setUserType.bind(this);
         this.createUser = this.createUser.bind(this);
-        this.userService = UserService.instance;
-
+        this.giverService = GiverService.instance;
+        this.receiverService = ReceiverService.instance;
+        this.adminService = AdminService.instance;
     }
 
     setUsername(event) {
         this.setState({username: event.target.value});
         console.log(this.state.username)
-
     }
 
     setEmail(event) {
@@ -35,17 +40,38 @@ class Register extends React.Component {
     setPassword(event) {
         this.setState({password: event.target.value});
         console.log(this.state.password)
-
     }
 
     setVerify(event) {
         this.setState({verify: event.target.value});
     }
 
+    setUserType(event) {
+        this.setState({userType: event.target.id})
+        console.log(this.state.userType);
+    }
+
     createUser() {
-        console.log(this.state)
         if (this.state) {
-            this.userService.createUser(this.state);
+            if(this.state.password !== this.state.verify) {
+                alert('Passswords to not match, please try again')
+            }
+            else if (this.state.userType === 'giver') {
+                this.giverService.createGiver(this.state);
+                console.log('giver');
+
+            }
+            else if (this.state.userType === 'receiver') {
+                this.receiverService.createReceiver(this.state);
+                console.log('receiver');
+            }
+            else if (this.state.userType === 'admin') {
+                this.adminService.createAdmin(this.state);
+                console.log('admin');
+            }
+            else {
+                alert('Please select a user type')
+            }
         }
     }
 
@@ -74,6 +100,36 @@ class Register extends React.Component {
                                 className="form-control"
                                 id="inputEmail"
                                 placeholder="Email"/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="inputPassword" className="col-sm-2 col-form-label">User (select one)</label>
+                        <div className="col-sm-10">
+                            <div className="form-check form-check-inline">
+                                <input
+                                    onChange={this.setUserType}
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="giver"
+                                />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox1">Giver</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input
+                                    onChange={this.setUserType}
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="receiver"/>
+                                    <label className="form-check-label" htmlFor="inlineCheckbox2">Receiver</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input
+                                    onChange={this.setUserType}
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="admin"/>
+                                <label className="form-check-label" htmlFor="inlineCheckbox2">Admin</label>
+                            </div>
                         </div>
                     </div>
                     <div className="form-group row">

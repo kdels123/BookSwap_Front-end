@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import APIService from "../services/APIService";
+import Review from "../components/Review";
 
 class ResultDetail extends React.Component {
     constructor(props) {
@@ -33,16 +34,16 @@ class ResultDetail extends React.Component {
                     <h2>{bookResults.volumeInfo.title} ({bookResults.volumeInfo.averageRating}/5)</h2>
                     <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div className="btn-group mr-2" role="group" aria-label="First group">
-                            <button type="button" className="btn btn-secondary">Own It?</button>
+                            <Link to={{pathname: '/bookswap/profile'}} className="btn btn-secondary">Own It?</Link>
                         </div>
                         <div className="btn-group mr-2" role="group" aria-label="Second group">
-                            <button type="button" className="btn btn-secondary">Find It!</button>
+                            <Link  to={{pathname: '/bookswap/request'}}className="btn btn-secondary">Find It!</Link>
                         </div>
                     </div>
                     <h3>By: {bookResults.volumeInfo.authors[0]}</h3>
                     <h3>Published: {bookResults.volumeInfo.publishedDate.substring(0, 4)}</h3>
                     <div>
-                    <img src ={bookResults.volumeInfo.imageLinks.small} className="float-left" style={{paddingRight: 10}}/>
+                    <img src ={bookResults.volumeInfo.imageLinks.thumbnail} className="float-left" style={{paddingRight: 10}}/>
                     <p id="descriptionText" className="text-left">{bookResults.volumeInfo.description}</p>
                     </div>
                 </div>
@@ -55,6 +56,7 @@ class ResultDetail extends React.Component {
         return (
             <div className="container">
                 <h1>{this.renderBookResults()}</h1>
+                <Review bookId={this.state.id}/>
             </div>
         )
     }
