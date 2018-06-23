@@ -24,6 +24,7 @@ class Profile extends React.Component {
         this.setsState = this.setsState.bind(this);
         this.updateUser = this.updateUser.bind(this);
         this.setUser = this.setUser.bind(this);
+        this.logout = this.logout.bind(this);
         this.userService = UserService.instance;
     }
 
@@ -79,10 +80,16 @@ class Profile extends React.Component {
                 .then((user) => {this.setUser(user)}));
     }
 
+    logout() {
+        this.userService.logout().then(() => {
+            window.location.assign('/bookswap/home');
+        });
+    }
+
     render() {
         return (
             <div className="container w-75 p-3">
-                <h1>Profile</h1>
+                <h1 className>Profile</h1>
                 <form>
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">First Name</label>
@@ -163,6 +170,15 @@ class Profile extends React.Component {
                                 onClick={this.updateUser}
                                 type="button"
                                 className="btn btn-primary btn-block">Update</button>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="inputPassword" className="col-sm-2 col-form-label"></label>
+                        <div className="col-sm-10">
+                            <button
+                                onClick={this.logout}
+                                type="button"
+                                className="btn btn-danger btn-block">Logout</button>
                         </div>
                     </div>
                 </form>

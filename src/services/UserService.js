@@ -43,6 +43,15 @@ export default class UserService {
             }).catch(() => alert('test'));
     }
 
+    logout() {
+        return fetch(USER_API_LOCAL + '/logout', {
+            method: 'post',
+            credentials: 'same-origin'
+        }).then(function (response) {
+            return response.json();
+        }).catch(() => alert('You are now logged-out'));
+    }
+
     static get instance() {
         if(!this[_singleton])
             this[_singleton] = new UserService(_singleton);

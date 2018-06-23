@@ -56,8 +56,12 @@ class Review extends React.Component {
     }
 
     createReview() {
-        this.reviewService.createReview(this.state.title, this.state.description, this.state.book.id)
-            .then(this.findAllReviewsForBook(this.state.book.id));
+        if (this.userService.profile() != null) {
+            this.reviewService.createReview(this.state.title, this.state.description, this.state.book.id)
+                .then(this.findAllReviewsForBook(this.state.book.id));
+        } else {
+            alert('Must register to Review');
+        }
     }
 
 
