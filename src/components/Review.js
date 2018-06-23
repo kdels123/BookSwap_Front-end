@@ -25,8 +25,15 @@ class Review extends React.Component {
         this.bookService = BookService.instance;
     }
 
+    setUser(user) {
+        this.setState({
+            userId: user.id
+        });
+    }
+
     componentDidMount() {
         this.addBook();
+        this.userService.review().then((user) => {this.setUser(user)});
     }
 
     findAllReviewsForBook() {
@@ -39,11 +46,6 @@ class Review extends React.Component {
             .then((book) => {this.setState({book: book})}).then(() => this.findAllReviewsForBook(this.state.book.id));
     }
 
-    setUser(user) {
-        this.setState({
-            userId: user.id
-        });
-    }
 
     setTitle(event) {
         this.setState({title: event.target.value});
@@ -56,12 +58,9 @@ class Review extends React.Component {
     }
 
     createReview() {
-        if (this.userService.profile() != null) {
-            this.reviewService.createReview(this.state.title, this.state.description, this.state.book.id)
-                .then(this.findAllReviewsForBook(this.state.book.id));
-        } else {
-            alert('Must register to Review');
-        }
+        this.reviewService.createReview(this.state.title, this.state.description, this.state.book.id, this.state.userId)
+            .then(this.findAllReviewsForBook(this.state.book.id));
+
     }
 
 

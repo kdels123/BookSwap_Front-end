@@ -43,6 +43,16 @@ export default class UserService {
             }).catch(() => alert('test'));
     }
 
+    review() {
+        return fetch('http://localhost:8080/api/user/review',
+            {
+                credentials: 'same-origin',
+            })
+            .then(function (response) {
+                return response.json();
+            }).catch(() => alert('test'));
+    }
+
     logout() {
         return fetch(USER_API_LOCAL + '/logout', {
             method: 'post',

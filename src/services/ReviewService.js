@@ -8,13 +8,14 @@ export default class UserService {
             throw new Error('Singleton!!!');
     }
 
-    createReview(reviewTitle, reviewDescription, bookId) {
-        return fetch('http://localhost:8080/api/book/' + bookId + '/review', {
+    createReview(reviewTitle, reviewDescription, bookId, userId) {
+        return fetch('http://localhost:8080/api/book/' + bookId +'/user/' + userId + '/review', {
             method: 'post',
             body: JSON.stringify({title: reviewTitle, description: reviewDescription}),
             headers: { 'Content-Type': 'application/json' },
         }).then(function (response) {
             return response.json(); })
+            .catch(() => alert('You are now logged-out'));
     }
 
     findAllReviewsForBook(bookId) {
