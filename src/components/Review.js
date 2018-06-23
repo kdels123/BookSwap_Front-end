@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import ReviewService from "../services/ReviewService";
+import UserService from "../services/UserService";
 
 class Review extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             title: '',
             description: '',
-            // bookId: this.props.bookId,
+            bookId: this.props.bookId,
             date: '',
             userId: '',
             reviews: []
@@ -16,6 +16,29 @@ class Review extends React.Component {
         this.setTitle = this.setTitle.bind(this);
         this.setDescription = this.setDescription.bind(this);
         this.reviewService = ReviewService.instance;
+        this.userService = UserService.instance;
+    }
+
+    componentDidMount() {
+        this.findAllReviewsForBook();
+        // this.userService.profile().then((user) => {this.setUser(user)});
+        console.log(this.state.bookId);
+
+    }
+
+    findAllReviewsForBook() {
+        this.reviewService.findAllReviewsForBook(this.state.bookId)
+            .then((reviews) => {this.setReviews(reviews)});
+    }
+
+    setReviews(reviews) {
+        this.setState({reviews: reviews});
+    }
+
+    setUser(user) {
+        this.setState({
+            userId: user.id
+        });
     }
 
     setTitle(event) {
@@ -31,6 +54,7 @@ class Review extends React.Component {
     createReview() {
         this.reviewService.createReview(this.state);
     }
+
 
     renderReviews() {
         let data = null;

@@ -18,6 +18,12 @@ export default class UserService {
             return response.json(); })
     }
 
+    findAllReviewsForBook(bookId) {
+        return fetch('http://localhost:8080/api/book/' + bookId + '/review')
+            .then(function (response) { return response.json();
+        })
+    }
+
     static get instance() {
         if(!this[_singleton])
             this[_singleton] = new UserService(_singleton);

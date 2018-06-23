@@ -9,6 +9,14 @@ class Results extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.addBooks();
+    }
+
+    addBooks() {
+        
+    }
+
     renderSearchResults() {
         let data = null;
         if (this.state.results) {

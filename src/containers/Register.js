@@ -14,14 +14,14 @@ class Register extends React.Component {
             email: '',
             password: '',
             verify: '',
-            userType: '',
+            type: '',
         };
 
         this.setUsername = this.setUsername.bind(this);
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
         this.setVerify = this.setVerify.bind(this);
-        this.setUserType = this.setUserType.bind(this);
+        this.setType = this.setType.bind(this);
         this.createUser = this.createUser.bind(this);
         this.giverService = GiverService.instance;
         this.receiverService = ReceiverService.instance;
@@ -46,9 +46,9 @@ class Register extends React.Component {
         this.setState({verify: event.target.value});
     }
 
-    setUserType(event) {
-        this.setState({userType: event.target.id})
-        console.log(this.state.userType);
+    setType(event) {
+        this.setState({type: event.target.id})
+        console.log(this.state.type);
     }
 
     createUser() {
@@ -56,18 +56,23 @@ class Register extends React.Component {
             if(this.state.password !== this.state.verify) {
                 alert('Passswords to not match, please try again')
             }
-            else if (this.state.userType === 'giver') {
-                this.giverService.createGiver(this.state);
-                console.log('giver');
-
+            else if (this.state.type === 'giver') {
+                this.giverService.createGiver(this.state)
+                    .then(() => {
+                    window.location.assign('/bookswap/login');
+                });
             }
-            else if (this.state.userType === 'receiver') {
-                this.receiverService.createReceiver(this.state);
-                console.log('receiver');
+            else if (this.state.type === 'receiver') {
+                this.receiverService.createReceiver(this.state)
+                    .then(() => {
+                    window.location.assign('/bookswap/login');
+                });
             }
-            else if (this.state.userType === 'admin') {
-                this.adminService.createAdmin(this.state);
-                console.log('admin');
+            else if (this.state.type === 'admin') {
+                this.adminService.createAdmin(this.state)
+                    .then(() => {
+                    window.location.assign('/bookswap/login');
+                });
             }
             else {
                 alert('Please select a user type')
@@ -107,7 +112,7 @@ class Register extends React.Component {
                         <div className="col-sm-10">
                             <div className="form-check form-check-inline">
                                 <input
-                                    onChange={this.setUserType}
+                                    onChange={this.setType}
                                     className="form-check-input"
                                     type="checkbox"
                                     id="giver"
@@ -116,7 +121,7 @@ class Register extends React.Component {
                             </div>
                             <div className="form-check form-check-inline">
                                 <input
-                                    onChange={this.setUserType}
+                                    onChange={this.setType}
                                     className="form-check-input"
                                     type="checkbox"
                                     id="receiver"/>
@@ -124,7 +129,7 @@ class Register extends React.Component {
                             </div>
                             <div className="form-check form-check-inline">
                                 <input
-                                    onChange={this.setUserType}
+                                    onChange={this.setType}
                                     className="form-check-input"
                                     type="checkbox"
                                     id="admin"/>

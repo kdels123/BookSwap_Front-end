@@ -22,8 +22,9 @@ export default class UserService {
     }
 
     updateUser(user) {
-        return fetch (USER_API_LOCAL + '/' + user.id, {
-            body: JSON.stringify({user}),
+        return fetch (USER_API_LOCAL + '/' + user.userId, {
+            method: 'put',
+            body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
             }})

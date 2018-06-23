@@ -29,11 +29,11 @@ class App extends React.Component {
                         <ul className="navbar-nav mr-auto">
 
                         </ul>
-                        <span className="navbar-text">
-                            <Link
-                                className="nav-link"
-                                to={{pathname: '/bookswap/profile'}}>Profile</Link>
-                        </span>
+                        {/*<span className="navbar-text">*/}
+                            {/*<Link*/}
+                                {/*className="nav-link"*/}
+                                {/*to={{pathname: '/bookswap/profile'}}>Profile</Link>*/}
+                        {/*</span>*/}
                         <span className="navbar-text">
                             <Link
                                 className="nav-link"

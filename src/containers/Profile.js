@@ -7,7 +7,7 @@ class Profile extends React.Component {
     constructor() {
         super()
         this.state = {
-            username: '',
+            userId: '',
             firstName: '',
             lastName: '',
             email: '',
@@ -15,58 +15,68 @@ class Profile extends React.Component {
             city: '',
             state: ''
         };
-        // this.setFirstName = this.setFirstName.bind(this);
-        // this.setLastName = this.setLastName.bind(this);
-        // this.setEmail = this.setEmail.bind(this);
-        // this.setAddress = this.setAddress.bind(this);
-        // this.setCity = this.setCity.bind(this);
-        // this.setState = this.setState.bind(this);
+
+        this.setFirstName = this.setFirstName.bind(this);
+        this.setLastName = this.setLastName.bind(this);
+        this.setEmail = this.setEmail.bind(this);
+        this.setAddress = this.setAddress.bind(this);
+        this.setCity = this.setCity.bind(this);
+        this.setsState = this.setsState.bind(this);
         this.updateUser = this.updateUser.bind(this);
-        this.setUsername = this.setUsername.bind(this);
+        this.setUser = this.setUser.bind(this);
         this.userService = UserService.instance;
     }
 
-    setUsername(user) {
-        this.setState({username: user.username});
-        console.log(this.state.username);
+    setUser(user) {
+        this.setState({
+            userId: user.id,
+            fistName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            address: user.address,
+            city: user.city,
+            state: user.state,
+        });
     }
 
     componentDidMount() {
-        this.userService.profile().then((user) => {this.setUsername(user)});
+        this.userService.profile().then((user) => {this.setUser(user)});
     }
 
-    // setFirstName(event) {
-    //     this.setState({firstName: event.target.value});
-    //     console.log(this.state.firstName)
-    // }
-    //
-    // setLastName(event) {
-    //     this.setState({lastName: event.target.value});
-    //     console.log(this.state.lastName)
-    // }
-    //
-    // setEmail(event) {
-    //     this.setState({email: event.target.value});
-    //     console.log(this.state.email)
-    // }
-    //
-    // setAddress(event) {
-    //     this.setState({address: event.target.value});
-    //     console.log(this.state.address)
-    // }
-    //
-    // setCity(event) {
-    //     this.setState({city: event.target.value});
-    //     console.log(this.state.city)
-    // }
-    //
-    // setState(event) {
-    //     this.setState({state: event.target.value});
-    //     console.log(this.state.state)
-    // }
+    setFirstName(event) {
+        this.setState({firstName: event.target.value});
+        console.log(this.state.firstName)
+    }
+
+    setLastName(event) {
+        this.setState({lastName: event.target.value});
+        console.log(this.state.lastName)
+    }
+
+    setEmail(event) {
+        this.setState({email: event.target.value});
+        console.log(this.state.email)
+    }
+
+    setAddress(event) {
+        this.setState({address: event.target.value});
+        console.log(this.state.address)
+    }
+
+    setCity(event) {
+        this.setState({city: event.target.value});
+        console.log(this.state.city)
+    }
+
+    setsState(event) {
+        this.setState({state: event.target.value});
+        console.log(this.state.state)
+    }
 
     updateUser() {
-        this.userService.updateUser(this.state);
+        this.userService.updateUser(this.state)
+            .then(() =>  this.userService.profile()
+                .then((user) => {this.setUser(user)}));
     }
 
     render() {
@@ -75,10 +85,10 @@ class Profile extends React.Component {
                 <h1>Profile</h1>
                 <form>
                     <div className="form-group row">
-                        <label htmlFor="inputPassword" className="col-sm-2 col-form-label">First Name</label>
+                        <label className="col-sm-2 col-form-label">First Name</label>
                         <div className="col-sm-10">
                             <input
-                                value={this.state.username}
+                                value={this.state.firstName}
                                 onChange={this.setFirstName}
                                 type="text"
                                 className="form-control"
@@ -104,7 +114,7 @@ class Profile extends React.Component {
                             <input
                                 value={this.state.email}
                                 onChange={this.setEmail}
-                                type="password"
+                                type="text"
                                 className="form-control"
                                 id="inputPasswordProfile"
                                 placeholder="Email"/>
@@ -139,7 +149,7 @@ class Profile extends React.Component {
                         <div className="col-sm-10">
                             <input
                                 value={this.state.state}
-                                onChange={this.setState}
+                                onChange={this.setsState}
                                 type="text"
                                 className="form-control"
                                 id="inputStateProfile"
