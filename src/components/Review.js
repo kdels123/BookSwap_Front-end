@@ -13,7 +13,7 @@ class Review extends React.Component {
             book: '',
             title: '',
             description: '',
-            date: '',
+            date: new Date(),
             userId: '',
             reviews: []
         };
@@ -58,7 +58,8 @@ class Review extends React.Component {
     }
 
     createReview() {
-        this.reviewService.createReview(this.state.title, this.state.description, this.state.book.id, this.state.userId)
+        const date = this.state.date.getMonth() +'/'+ this.state.date.getDay() +'/'+  this.state.date.getFullYear()
+        this.reviewService.createReview(this.state.title, this.state.description, date, this.state.book.id, this.state.userId)
             .then(this.findAllReviewsForBook(this.state.book.id));
 
     }

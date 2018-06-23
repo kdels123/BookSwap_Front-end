@@ -8,10 +8,10 @@ export default class UserService {
             throw new Error('Singleton!!!');
     }
 
-    createReview(reviewTitle, reviewDescription, bookId, userId) {
+    createReview(reviewTitle, reviewDescription, reviewDate, bookId, userId) {
         return fetch('http://localhost:8080/api/book/' + bookId +'/user/' + userId + '/review', {
             method: 'post',
-            body: JSON.stringify({title: reviewTitle, description: reviewDescription}),
+            body: JSON.stringify({title: reviewTitle, description: reviewDescription, date: reviewDate}),
             headers: { 'Content-Type': 'application/json' },
         }).then(function (response) {
             return response.json(); })
