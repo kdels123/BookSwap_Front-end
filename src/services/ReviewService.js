@@ -8,12 +8,11 @@ export default class UserService {
             throw new Error('Singleton!!!');
     }
 
-    createReview(review) {
-        return fetch(REVIEW_API_LOCAL, {
-            body: JSON.stringify(review),
+    createReview(reviewTitle, reviewDescription, bookId) {
+        return fetch('http://localhost:8080/api/book/' + bookId + '/review', {
+            method: 'post',
+            body: JSON.stringify({title: reviewTitle, description: reviewDescription}),
             headers: { 'Content-Type': 'application/json' },
-            method: 'POST',
-            credentials: 'same-origin',
         }).then(function (response) {
             return response.json(); })
     }

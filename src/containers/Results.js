@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BookService from "../services/BookService";
 
 class Results extends React.Component {
     constructor(props) {
@@ -7,14 +8,6 @@ class Results extends React.Component {
         this.state={
             results: this.props.location.state
         }
-    }
-
-    componentDidMount() {
-        this.addBooks();
-    }
-
-    addBooks() {
-        
     }
 
     renderSearchResults() {

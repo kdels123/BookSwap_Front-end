@@ -1,38 +1,42 @@
 import React from 'react';
 import ReviewService from "../services/ReviewService";
 import UserService from "../services/UserService";
+import BookService from "../services/BookService";
 
 class Review extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            bookId: this.props.bookId,
+            bookTitle: this.props.bookTitle,
+            bookAuthor: this.props.bookAuthor,
+            book: '',
             title: '',
             description: '',
-            bookId: this.props.bookId,
             date: '',
             userId: '',
             reviews: []
         };
         this.setTitle = this.setTitle.bind(this);
         this.setDescription = this.setDescription.bind(this);
+        this.createReview = this.createReview.bind(this);
         this.reviewService = ReviewService.instance;
         this.userService = UserService.instance;
+        this.bookService = BookService.instance;
     }
 
     componentDidMount() {
-        this.findAllReviewsForBook();
-        // this.userService.profile().then((user) => {this.setUser(user)});
-        console.log(this.state.bookId);
-
+        this.addBook();
     }
 
     findAllReviewsForBook() {
-        this.reviewService.findAllReviewsForBook(this.state.bookId)
-            .then((reviews) => {this.setReviews(reviews)});
+        this.reviewService.findAllReviewsForBook(this.state.book.id)
+            .then((reviews) => {this.setState({reviews: reviews})});
     }
 
-    setReviews(reviews) {
-        this.setState({reviews: reviews});
+    addBook() {
+        this.bookService.addBook(this.state.bookId, this.state.bookTitle, this.state.bookAuthor)
+            .then((book) => {this.setState({book: book})}).then(() => this.findAllReviewsForBook(this.state.book.id));
     }
 
     setUser(user) {
@@ -52,7 +56,8 @@ class Review extends React.Component {
     }
 
     createReview() {
-        this.reviewService.createReview(this.state);
+        this.reviewService.createReview(this.state.title, this.state.description, this.state.book.id)
+            .then(this.findAllReviewsForBook(this.state.book.id));
     }
 
 
@@ -63,7 +68,8 @@ class Review extends React.Component {
                 (result, i) => {
                     return (
                         <li className="list-group-item">
-                           <p>{result.title}, {i}</p>
+                           <p>Review Title: {result.title}</p>
+                            <p>Review Description: {result.description}</p>
                         </li>
                     )});
         }
@@ -81,7 +87,7 @@ class Review extends React.Component {
                         <label htmlFor="exampleFormControlInput1">Title</label>
                         <input
                             onChange={this.setTitle}
-                            type="email"
+                            type="text"
                             className="form-control"
                             id="exampleFormControlInput1"
                             placeholder="Review Title"/>
@@ -89,10 +95,12 @@ class Review extends React.Component {
                         <div className="form-group">
                     <textarea
                         onChange={this.setDescription}
+                        type="text"
                         placeholder="Write Review Here"
                         className="form-control"
                         id="exampleFormControlTextarea1"
-                        rows="3"> </textarea>
+                        rows="3">
+                    </textarea>
                         </div>
                     </div>
                     <div>

@@ -7,7 +7,7 @@ class ResultDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            id: this.props.location.state.id,
+            bookId: this.props.location.state.id,
             bookResults: ''
         }
         this.APIService = APIService.instance;
@@ -15,13 +15,12 @@ class ResultDetail extends React.Component {
     }
 
     componentDidMount() {
-        this.APIService.findBookByID(this.state.id).then((bookResults) => {this.setBookResults(bookResults)})
+        this.APIService.findBookByID(this.state.bookId).then((bookResults) => {this.setBookResults(bookResults)})
     }
 
     setBookResults(bookResults) {
         this.setState({bookResults: bookResults})
         this.setState(this.state)
-        console.log(this.state.bookResults);
     }
 
     renderBookResults() {
@@ -52,11 +51,26 @@ class ResultDetail extends React.Component {
     bookResults)
     }
 
+    renderReviews() {
+        let bookResults = null;
+        if (this.state.bookResults) {
+            bookResults = this.state.bookResults
+            return (
+                <Review
+                    bookId={this.state.bookResults.id}
+                    bookTitle={this.state.bookResults.volumeInfo.title}
+                    bookAuthor={this.state.bookResults.volumeInfo.authors[0]}
+                />
+            )};
+        return (
+            bookResults)
+    }
+
     render() {
         return (
             <div className="container">
                 <h1>{this.renderBookResults()}</h1>
-                <Review bookId={this.state.id}/>
+                {this.renderReviews()}
             </div>
         )
     }
