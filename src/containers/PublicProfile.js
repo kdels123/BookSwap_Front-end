@@ -57,8 +57,6 @@ class PublicProfile extends React.Component {
                 <h1 className>Profile: {this.state.profileUsername}</h1>
                 <p>{this.state.profileCity}, {this.state.profileState}</p>
                 <button className="btn">Contact</button>
-                <h2>Books You Currently Own</h2>
-                <h2>Books You Requested</h2>
                 {this.renderAdminProfile()}
             </div>
         )

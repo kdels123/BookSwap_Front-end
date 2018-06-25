@@ -1,5 +1,6 @@
 import React from 'react'
 import UserService from "../services/UserService";
+import BookUserService from '../services/BookUserService';
 
 
 class Profile extends React.Component {
@@ -8,12 +9,14 @@ class Profile extends React.Component {
         super()
         this.state = {
             userId: '',
+            userType: '',
             firstName: '',
             lastName: '',
             email: '',
             address: '',
             city: '',
-            state: ''
+            state: '',
+            books: []
         };
 
         this.setFirstName = this.setFirstName.bind(this);
@@ -26,11 +29,13 @@ class Profile extends React.Component {
         this.setUser = this.setUser.bind(this);
         this.logout = this.logout.bind(this);
         this.userService = UserService.instance;
+        this.bookUserService = BookUserService.instance;
     }
 
     setUser(user) {
         this.setState({
             userId: user.id,
+            userType: user.type,
             fistName: user.firstName,
             lastName: user.lastName,
             email: user.email,
@@ -41,7 +46,8 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        this.userService.profile().then((user) => {this.setUser(user)});
+        this.userService.profile().then((user) => {this.setUser(user)}).then(() => this.findAllBooksForUser(this.state.userId))
+
     }
 
     setFirstName(event) {
@@ -84,6 +90,42 @@ class Profile extends React.Component {
         this.userService.logout().then(() => {
             window.location.assign('/bookswap/home');
         });
+    }
+
+    findAllBooksForUser() {
+        this.bookUserService.findAllBooksForUser(this.state.userId).then((books) => {this.setState({books: books})});
+        console.log(this.state.books);
+    }
+
+    renderProfileType() {
+        if(this.state.userType === 'giver') {
+            return (
+                <h3>Books You Own</h3>
+            )
+        } else if (this.state.userType === 'receiver') {
+            return (
+                <h3>Books You Requested</h3>
+            )
+        }
+    }
+
+
+    renderListOfBooks() {
+        let data = null;
+        if (this.state.books) {
+            data = this.state.books.map(
+                (book, i) => {
+                    return (
+                        <li className="list-group-item"
+                            id="resultItem"
+                            key={i}>
+                            {book.title}
+                        </li>
+                    )});
+        }
+        return (
+            data
+        )
     }
 
     render() {
@@ -182,8 +224,8 @@ class Profile extends React.Component {
                         </div>
                     </div>
                 </form>
-                <h2>Books You Currently Own</h2>
-                <h2>Books You Requested</h2>
+                {this.renderProfileType()}
+                {this.renderListOfBooks()}
             </div>
         )
     }

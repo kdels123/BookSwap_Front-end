@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import APIService from "../services/APIService";
-import UserService from '../services/UserService'
+import UserService from '../services/UserService';
 import Review from "../components/Review";
 import AdminReview from "../components/AdminReview";
 
@@ -11,7 +11,8 @@ class ResultDetail extends React.Component {
         this.state={
             bookId: this.props.location.state.id,
             bookResults: '',
-            userType: ''
+            userType: '',
+            userId: ''
         }
         this.APIService = APIService.instance;
         this.userService = UserService.instance;
@@ -31,6 +32,7 @@ class ResultDetail extends React.Component {
     setUser(user) {
         this.setState({
             userType: user.type,
+            userId: user.id
         });
     }
 
@@ -42,14 +44,6 @@ class ResultDetail extends React.Component {
                 <div className={"container-fluid"}>
                     <br style={{lineHeight: 0.5}}/>
                     <h2>{bookResults.volumeInfo.title} ({bookResults.volumeInfo.averageRating}/5)</h2>
-                    <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <div className="btn-group mr-2" role="group" aria-label="First group">
-                            <Link to={{pathname: '/bookswap/profile'}} className="btn btn-secondary">Own It?</Link>
-                        </div>
-                        <div className="btn-group mr-2" role="group" aria-label="Second group">
-                            <Link  to={{pathname: '/bookswap/request'}}className="btn btn-secondary">Find It!</Link>
-                        </div>
-                    </div>
                     <h3>By: {bookResults.volumeInfo.authors[0]}</h3>
                     <h3>Published: {bookResults.volumeInfo.publishedDate.substring(0, 4)}</h3>
                     <div>

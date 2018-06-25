@@ -29,3 +29,16 @@
 #descriptionText {
     font-size: medium;
 }
+
+#resultsList {
+    border-bottom: dodgerblue;
+    border-b: medium;
+}
+
+#resultItem {
+    border-width: medium;
+    border-top-color: dodgerblue;
+    border-bottom-color: dodgerblue;
+    border-left-color: dodgerblue;
+    border-right-color: dodgerblue;
+}

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserService from "../services/UserService";
 
 class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            results: this.props.location.state
+            results: this.props.location.state,
         }
     }
 
@@ -16,6 +17,7 @@ class Results extends React.Component {
                 (result, i) => {
                     return (
                         <li className="list-group-item"
+                            id="resultItem"
                             key={i}>
                             Title: <Link
                                 to={{
@@ -29,17 +31,6 @@ class Results extends React.Component {
                             <br/>
                             <img src ={result.volumeInfo.imageLinks.thumbnail} />
                             <br/>
-                            <br/>
-                                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div className="btn-group mr-2" role="group" aria-label="First group">
-                                          <Link to={{pathname: '/bookswap/profile'}}
-                                                 className="btn btn-secondary btn-sm">Own It?</Link>
-                                    </div>
-                                    <div className="btn-group mr-2" role="group" aria-label="Second group">
-                                        <Link to={{pathname: '/bookswap/request'}}className="btn btn-secondary btn-sm">Find It!</Link>
-                                    </div>
-                                </div>
-                            <br/>
                         </li>
                     )});
         }
@@ -51,7 +42,7 @@ class Results extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <ul className="list-group list-group-flush">
+                <ul className="list-group border-aqua" id="resultsList">
                 {this.renderSearchResults()}
                 </ul>
             </div>

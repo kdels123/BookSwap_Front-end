@@ -3,6 +3,7 @@ import ReviewService from "../services/ReviewService";
 import UserService from "../services/UserService";
 import BookService from "../services/BookService";
 import { Link } from 'react-router-dom'
+import BookUserService from "../services/BookUserService";
 
 class Review extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class Review extends React.Component {
             date: new Date(),
             userId: '',
             username: '',
+            userType: '',
             reviews: []
         };
         this.setTitle = this.setTitle.bind(this);
@@ -25,12 +27,14 @@ class Review extends React.Component {
         this.reviewService = ReviewService.instance;
         this.userService = UserService.instance;
         this.bookService = BookService.instance;
+        this.bookUserService = BookUserService.instance;
     }
 
     setUser(user) {
         this.setState({
             userId: user.id,
-            username: user.username
+            username: user.username,
+            userType: user.type
         });
     }
 
@@ -48,7 +52,6 @@ class Review extends React.Component {
         this.bookService.addBook(this.state.bookId, this.state.bookTitle, this.state.bookAuthor)
             .then((book) => {this.setState({book: book})}).then(() => this.findAllReviewsForBook(this.state.book.id));
     }
-
 
     setTitle(event) {
         this.setState({title: event.target.value});
@@ -69,6 +72,38 @@ class Review extends React.Component {
                 .then(this.findAllReviewsForBook(this.state.book.id));
         } else {
             alert('Must be logged in to write review')
+        }
+    }
+
+    addBookToUser() {
+        this.bookUserService.addBookToUser(this.state.userId, this.state.book.id).then(() => {
+            window.location.assign('/bookswap/profile');
+        });
+    }
+
+    renderButtons() {
+        if(this.state.userType === 'giver') {
+            return (
+                <div>
+                    <br/>
+                    <button
+                        onClick={() => this.addBookToUser()}
+                        type="button"
+                        className="btn btn-success btn-block">Own It?</button>
+                    <br/>
+                </div>
+            )
+        }
+        else if (this.state.userType === 'receiver') {
+            return (
+                <div>
+                    <br/>
+                    <button
+                        type="button"
+                        className="btn btn-success btn-block">Find It!</button>
+                    <br/>
+                </div>
+            )
         }
     }
 
@@ -99,6 +134,7 @@ class Review extends React.Component {
     render() {
         return (
             <div>
+                {this.renderButtons()}
                 <h3>Write a Review</h3>
                 <form>
                     <div className="form-group">
