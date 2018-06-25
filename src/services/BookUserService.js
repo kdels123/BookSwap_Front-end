@@ -19,6 +19,14 @@ export default class BookUserService {
         });
     }
 
+    removeBookFromUser(userId, bookId) {
+        return fetch(BOOK_USER_API_LOCAL.replace('BID', bookId).replace('UID', userId), {
+            method: 'delete'
+            }).then(function (response) {
+            return response;
+        });
+    }
+
     findAllBooksForUser(userId) {
         return fetch('http://localhost:8080/api/book/user/' + userId)
             .then(function (response) { return response.json();

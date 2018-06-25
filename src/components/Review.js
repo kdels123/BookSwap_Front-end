@@ -121,7 +121,7 @@ class Review extends React.Component {
                                <Link
                                    to={{pathname: '/bookswap/user/'+ result.userId + '/profile',
                                        state: { userId: result.userId}
-                                   }}>{result.username}</Link>
+                                   }}> {result.username}</Link>
                                </p>
                             <p>Review Description: {result.description}</p>
                         </li>
