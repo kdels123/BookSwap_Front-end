@@ -2,6 +2,7 @@ import React from 'react';
 import ReviewService from "../services/ReviewService";
 import UserService from "../services/UserService";
 import BookService from "../services/BookService";
+import { Link } from 'react-router-dom'
 
 class Review extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class Review extends React.Component {
             description: '',
             date: new Date(),
             userId: '',
+            username: '',
             reviews: []
         };
         this.setTitle = this.setTitle.bind(this);
@@ -27,7 +29,8 @@ class Review extends React.Component {
 
     setUser(user) {
         this.setState({
-            userId: user.id
+            userId: user.id,
+            username: user.username
         });
     }
 
@@ -58,12 +61,16 @@ class Review extends React.Component {
     }
 
     createReview() {
-        const date = this.state.date.getMonth() +'/'+ this.state.date.getDay() +'/'+  this.state.date.getFullYear()
-        this.reviewService.createReview(this.state.title, this.state.description, date, this.state.book.id, this.state.userId)
-            .then(this.findAllReviewsForBook(this.state.book.id));
-
+        if (this.state.userId) {
+            const month = this.state.date.getMonth() + 1;
+            const date = month + '/' + this.state.date.getDate() + '/' + this.state.date.getFullYear()
+            this.reviewService.createReview(
+                this.state.title, this.state.description, date, this.state.username, this.state.book.id, this.state.userId)
+                .then(this.findAllReviewsForBook(this.state.book.id));
+        } else {
+            alert('Must be logged in to write review')
+        }
     }
-
 
     renderReviews() {
         let data = null;
@@ -72,7 +79,13 @@ class Review extends React.Component {
                 (result, i) => {
                     return (
                         <li className="list-group-item">
-                           <p>Review Title: {result.title}</p>
+                            <p className="float-right">{result.date}</p>
+                           <p>Review Title: {result.title}, By:
+                               <Link
+                                   to={{pathname: '/bookswap/user/'+ result.userId + '/profile',
+                                       state: { userId: result.userId}
+                                   }}>{result.username}</Link>
+                               </p>
                             <p>Review Description: {result.description}</p>
                         </li>
                     )});
@@ -120,7 +133,6 @@ class Review extends React.Component {
             </div>
         )
     }
-
-
+    
 }
 export default Review;

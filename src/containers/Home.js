@@ -1,10 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import UserService from "../services/UserService";
 
 document.body.style.backgroundColor = "lightgrey"
 // document.body.style.backgroundImage = "url('https://www.cambridgema.gov/~/media/Images/Traffic/residentpermitphotocontest/2017/Library_Kathleen_Delsener.jpg?mw=450&mh=334')"
 
 class Home extends React.Component {
+
+    constructor() {
+        super()
+
+        this.logout = this.logout.bind(this);
+        this.userService = UserService.instance;
+    }
+
+    logout() {
+        this.userService.logout().then(() => {
+            window.location.assign('/bookswap/home');
+        });
+    }
 
     render() {
         return (
@@ -35,6 +49,11 @@ class Home extends React.Component {
                         <Link
                             className="btn btn-primary mb-2"
                             to={{pathname: '/bookswap/search'}}>Search For Books!</Link>
+                    </div>
+                    <div className="form-group">
+                        <button
+                            onClick={this.logout}
+                            className="btn btn-danger btn-block mb-2">Logout</button>
                     </div>
                 </form>
             </div>

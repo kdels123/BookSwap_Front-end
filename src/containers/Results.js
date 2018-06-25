@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import BookService from "../services/BookService";
 
 class Results extends React.Component {
     constructor(props) {
@@ -18,7 +17,6 @@ class Results extends React.Component {
                     return (
                         <li class="list-group-item">
                             Title: <Link
-                                // className="btn btn-primary mb-2"
                                 to={{
                                     pathname: '/bookswap/results/book',
                                     state: {id: result.id}
