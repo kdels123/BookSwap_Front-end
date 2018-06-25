@@ -1,26 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import APIService from "../services/APIService";
+import UserService from '../services/UserService'
 import Review from "../components/Review";
+import AdminReview from "../components/AdminReview";
 
 class ResultDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state={
             bookId: this.props.location.state.id,
-            bookResults: ''
+            bookResults: '',
+            userType: ''
         }
         this.APIService = APIService.instance;
+        this.userService = UserService.instance;
 
     }
 
     componentDidMount() {
         this.APIService.findBookByID(this.state.bookId).then((bookResults) => {this.setBookResults(bookResults)})
+        this.userService.review().then((user) => {this.setUser(user)});
     }
 
     setBookResults(bookResults) {
         this.setState({bookResults: bookResults})
         this.setState(this.state)
+    }
+
+    setUser(user) {
+        this.setState({
+            userType: user.type,
+        });
     }
 
     renderBookResults() {
@@ -53,7 +64,15 @@ class ResultDetail extends React.Component {
 
     renderReviews() {
         let bookResults = null;
-        if (this.state.bookResults) {
+        if (this.state.bookResults && this.state.userType === 'admin') {
+            bookResults = this.state.bookResults
+            return (
+            <AdminReview
+                bookId={this.state.bookResults.id}
+                bookTitle={this.state.bookResults.volumeInfo.title}
+                bookAuthor={this.state.bookResults.volumeInfo.authors[0]}/>
+            )}
+        else if (this.state.bookResults) {
             bookResults = this.state.bookResults
             return (
                 <Review

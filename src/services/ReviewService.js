@@ -18,6 +18,14 @@ export default class UserService {
             .catch(() => alert('Must be logged in order to create response'));
     }
 
+    deleteReview(reviewId) {
+        return fetch(REVIEW_API_LOCAL + '/' + reviewId, {
+            method: 'delete'
+        }).then(function (response) {
+            return response;
+        })
+    }
+
     findAllReviewsForBook(bookId) {
         return fetch('http://localhost:8080/api/book/' + bookId + '/review')
             .then(function (response) { return response.json();

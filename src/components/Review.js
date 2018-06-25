@@ -78,7 +78,8 @@ class Review extends React.Component {
             data = this.state.reviews.map(
                 (result, i) => {
                     return (
-                        <li className="list-group-item">
+                        <li className="list-group-item"
+                            key={i}>
                             <p className="float-right">{result.date}</p>
                            <p>Review Title: {result.title}, By:
                                <Link
@@ -129,10 +130,12 @@ class Review extends React.Component {
                     </div>
                 </form>
                 <h3>Reviews</h3>
+                <ul className="list-group">
                 {this.renderReviews()}
+                </ul>
             </div>
         )
     }
-    
+
 }
 export default Review;

@@ -15,7 +15,8 @@ class Results extends React.Component {
             data = this.state.results.results.items.map(
                 (result, i) => {
                     return (
-                        <li class="list-group-item">
+                        <li className="list-group-item"
+                            key={i}>
                             Title: <Link
                                 to={{
                                     pathname: '/bookswap/results/book',
@@ -50,7 +51,7 @@ class Results extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <ul class="list-group list-group-flush">
+                <ul className="list-group list-group-flush">
                 {this.renderSearchResults()}
                 </ul>
             </div>
