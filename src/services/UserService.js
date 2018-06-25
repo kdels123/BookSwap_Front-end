@@ -33,6 +33,14 @@ export default class UserService {
         })
     }
 
+    deleteUser(userId) {
+        return fetch(USER_API_LOCAL + '/' + userId, {
+            method: 'delete'
+        }).then(function (response) {
+            return response;
+        })
+    }
+
     findUserById(userId) {
         return fetch(USER_API_LOCAL + '/' + userId).then(function (response) {
                 return response.json();

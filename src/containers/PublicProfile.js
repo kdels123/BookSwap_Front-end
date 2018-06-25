@@ -25,23 +25,30 @@ class PublicProfile extends React.Component {
 
     setUser(user) {
         this.setState({
-            userType: user.userType
+            userType: user.type
         })
     }
 
     componentDidMount() {
         this.userService.findUserById(this.state.profileUserId.userId).then((profile) => {this.setProfile(profile)});
         this.userService.profile().then((user) => {this.setUser(user)});
-        this.setState(this.state);
+    }
+
+    deleteUser(userId) {
+        this.userService.deleteUser(userId).then(() => {
+            window.location.assign('/bookswap/search');
+        });
     }
 
     renderAdminProfile() {
         if(this.state.userType === 'admin') {
             return (
-                
+                <button
+                    onClick={() => this.deleteUser(this.state.profileUserId.userId)}
+                    type="button"
+                    className="btn btn-danger btn-block">Delete User</button>
             )
         }
-
     }
 
     render() {
@@ -52,7 +59,7 @@ class PublicProfile extends React.Component {
                 <button className="btn">Contact</button>
                 <h2>Books You Currently Own</h2>
                 <h2>Books You Requested</h2>
-
+                {this.renderAdminProfile()}
             </div>
         )
     }
