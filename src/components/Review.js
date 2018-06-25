@@ -98,9 +98,10 @@ class Review extends React.Component {
             return (
                 <div>
                     <br/>
-                    <button
-                        type="button"
-                        className="btn btn-success btn-block">Find It!</button>
+                    <Link to={{pathname: '/bookswap/request',
+                        state: { bookId: this.state.book.id}
+                    }}
+                        className="btn btn-success btn-block">Find It!</Link>
                     <br/>
                 </div>
             )
@@ -113,7 +114,7 @@ class Review extends React.Component {
             data = this.state.reviews.map(
                 (result, i) => {
                     return (
-                        <li className="list-group-item"
+                        <li className="list-group-item" id="resultItem"
                             key={i}>
                             <p className="float-right">{result.date}</p>
                            <p>Review Title: {result.title}, By:
@@ -134,6 +135,9 @@ class Review extends React.Component {
     render() {
         return (
             <div>
+                <br/>
+                <br/>
+                <br/>
                 {this.renderButtons()}
                 <h3>Write a Review</h3>
                 <form>

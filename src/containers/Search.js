@@ -94,7 +94,16 @@ class Search extends React.Component {
                        pathname: '/bookswap/search/results',
                        state: {results: this.state.results}
                    }}>
-                       See Results!
+                       See Results
+                   </Link>
+                   &nbsp;
+                   &nbsp;
+                   <Link
+                       className="btn btn-primary mb-2"
+                       to={{
+                           pathname: '/bookswap/search',
+                       }}>
+                       New Search
                    </Link>
                </form>
                <p id="searchSubtitle">*At Least one Field Must be Completed in order to Search</p>

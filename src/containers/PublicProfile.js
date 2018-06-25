@@ -1,5 +1,6 @@
 import React from 'react'
 import UserService from "../services/UserService";
+import BookUserService from "../services/BookUserService";
 
 class PublicProfile extends React.Component {
 
@@ -10,27 +11,35 @@ class PublicProfile extends React.Component {
             profileUsername: '',
             profileCity: '',
             profileState: '',
-            userType: ''
+            profileType: '',
+            userType: '',
+            userId: '',
+            books: []
         }
         this.userService = UserService.instance;
+        this.bookUserService = BookUserService.instance;
     }
 
     setProfile(profile) {
         this.setState({
             profileUsername: profile.username,
             profileCity: profile.city,
-            profileState: profile.state
+            profileState: profile.state,
+            profileType: profile.type,
         });
     }
 
     setUser(user) {
         this.setState({
-            userType: user.type
+            userType: user.type,
+            userId: user.id
         })
     }
 
     componentDidMount() {
-        this.userService.findUserById(this.state.profileUserId.userId).then((profile) => {this.setProfile(profile)});
+        this.userService.findUserById(this.state.profileUserId.userId)
+            .then((profile) => {this.setProfile(profile)})
+            .then(() => {this.findAllBooksForUser()});
         this.userService.profile().then((user) => {this.setUser(user)});
     }
 
@@ -51,12 +60,70 @@ class PublicProfile extends React.Component {
         }
     }
 
+    findAllBooksForUser() {
+        this.bookUserService.findAllBooksForUser(this.state.profileUserId.userId).then((books) => {this.setState({books: books})});
+        console.log(this.state.books);
+    }
+
+    renderProfileType() {
+        if(this.state.profileType === 'giver') {
+            return (
+                <h3>Books Owned</h3>
+            )
+        } else if (this.state.profileType === 'receiver') {
+            return (
+                <h3>Books Requested</h3>
+            )
+        }
+    }
+
+    renderBooks() {
+        let data = null;
+        if (this.state.books) {
+            data = this.state.books.map(
+                (book, i) => {
+                    return (
+                        <li className="list-group-item"
+                            id="resultItem"
+                            key={i}>
+                            {book.title}
+                        </li>
+                    )});
+        }
+        return (
+            data
+        )
+    }
+
     render() {
         return (
-            <div className="container w-75 p-3">
-                <h1 className>Profile: {this.state.profileUsername}</h1>
-                <p>{this.state.profileCity}, {this.state.profileState}</p>
-                <button className="btn">Contact</button>
+            <div className="container w-50 p-5">
+                <h2>Profile</h2>
+                <form id="publicProfile" className="border border-primary border">
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">Username:</label>
+                        <div className="col-sm-10">
+                            <input type="text" readOnly className="form-control-plaintext"
+                                   value={this.state.profileUsername}/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">City:</label>
+                        <div className="col-sm-10">
+                            <input type="text" readOnly className="form-control-plaintext"
+                                   value={this.state.profileCity}/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label">State:</label>
+                        <div className="col-sm-10">
+                            <input type="text" readOnly className="form-control-plaintext" id="staticEmail"
+                                   value={this.state.profileState}/>
+                        </div>
+                    </div>
+                </form>
+                {this.renderProfileType()}
+                {this.renderBooks()}
                 {this.renderAdminProfile()}
             </div>
         )

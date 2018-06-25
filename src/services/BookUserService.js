@@ -25,6 +25,12 @@ export default class BookUserService {
             })
     }
 
+    findAllUsersForBook(bookId) {
+        return fetch('http://localhost:8080/api/book/' + bookId + '/user/')
+            .then(function (response) { return response.json();
+            })
+    }
+
     static get instance() {
         if(!this[_singleton])
             this[_singleton] = new BookUserService(_singleton);

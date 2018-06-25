@@ -61,10 +61,12 @@ class ResultDetail extends React.Component {
         if (this.state.bookResults && this.state.userType === 'admin') {
             bookResults = this.state.bookResults
             return (
+                <div>
             <AdminReview
                 bookId={this.state.bookResults.id}
                 bookTitle={this.state.bookResults.volumeInfo.title}
                 bookAuthor={this.state.bookResults.volumeInfo.authors[0]}/>
+                </div>
             )}
         else if (this.state.bookResults) {
             bookResults = this.state.bookResults
@@ -83,6 +85,7 @@ class ResultDetail extends React.Component {
         return (
             <div className="container">
                 <h1>{this.renderBookResults()}</h1>
+
                 {this.renderReviews()}
             </div>
         )

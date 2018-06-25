@@ -25,8 +25,7 @@ class Results extends React.Component {
                                     state: {id: result.id}
                                 }}>{result.volumeInfo.title}</Link>
                             <br/>
-                            Author: {result.volumeInfo.authors[0]}
-                            <br/>
+                            {/*Author: {result.volumeInfo.authors[0]}*/}
                             Rating: {result.volumeInfo.averageRating}/5
                             <br/>
                             <img src ={result.volumeInfo.imageLinks.thumbnail} />

@@ -36,7 +36,7 @@ class Profile extends React.Component {
         this.setState({
             userId: user.id,
             userType: user.type,
-            fistName: user.firstName,
+            firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
             address: user.address,
@@ -108,7 +108,6 @@ class Profile extends React.Component {
             )
         }
     }
-
 
     renderListOfBooks() {
         let data = null;

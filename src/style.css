@@ -42,3 +42,9 @@
     border-left-color: dodgerblue;
     border-right-color: dodgerblue;
 }
+
+#publicProfile {
+    background-color: white;
+    padding-left: 10px;
+
+}
