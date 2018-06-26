@@ -124,7 +124,7 @@ class PublicProfile extends React.Component {
                                 onChange={this.setBookTitle}
                                 className="form-control"
                                 id="exampleFormControlInput1"
-                                placeholder="Book Request"/>
+                                placeholder="Book Title"/>
                         </div>
                         <div className="form-group">
                             <textarea

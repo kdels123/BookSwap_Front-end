@@ -47,6 +47,12 @@ export default class UserService {
         })
     }
 
+    findAllUsers() {
+        return fetch(USER_API_LOCAL + 's').then(function (response) {
+            return response.json();
+        })
+    }
+
     profile() {
         return fetch('http://localhost:8080/api/profile',
             {

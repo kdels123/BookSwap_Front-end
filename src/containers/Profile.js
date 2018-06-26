@@ -1,6 +1,7 @@
 import React from 'react'
 import UserService from "../services/UserService";
 import BookUserService from '../services/BookUserService';
+import { Link } from 'react-router-dom'
 
 
 class Profile extends React.Component {
@@ -105,6 +106,12 @@ class Profile extends React.Component {
         } else if (this.state.userType === 'receiver') {
             return (
                 <h3>Books You Requested</h3>
+            )
+        } else if (this.state.userType === 'admin') {
+            return (
+                <Link
+                    className="btn btn-block btn-primary"
+                    to={{pathname: '/bookswap/users'}}>View All Users</Link>
             )
         }
     }
