@@ -1,6 +1,7 @@
 import React from 'react'
 import UserService from "../services/UserService";
 import BookUserService from "../services/BookUserService";
+import RequestService from "../services/RequestService";
 
 class PublicProfile extends React.Component {
 
@@ -14,10 +15,19 @@ class PublicProfile extends React.Component {
             profileType: '',
             userType: '',
             userId: '',
+            firstName: '',
+            bookTitle: '',
+            bookId: this.props.location.state.bookId,
+            message: '',
             books: []
         }
+        this.setFirstName = this.setFirstName.bind(this);
+        this.setBookTitle = this.setBookTitle.bind(this);
+        this.setMessage = this.setMessage.bind(this);
+        this.createRequest = this.createRequest.bind(this);
         this.userService = UserService.instance;
         this.bookUserService = BookUserService.instance;
+        this.requestService = RequestService.instance;
     }
 
     setProfile(profile) {
@@ -41,6 +51,37 @@ class PublicProfile extends React.Component {
             .then((profile) => {this.setProfile(profile)})
             .then(() => {this.findAllBooksForUser()});
         this.userService.profile().then((user) => {this.setUser(user)});
+    }
+
+    setFirstName(event) {
+        this.setState({bookTitle: event.target.value});
+        console.log(this.state.firstName)
+    }
+
+    setBookTitle(event) {
+        this.setState({message: event.target.value});
+        console.log(this.state.bookTitle)
+    }
+
+    setMessage(event) {
+        this.setState({email: event.target.value});
+        console.log(this.state.message)
+    }
+
+    addBookToUser() {
+        this.bookUserService.addBookToUser(this.state.userId, this.state.bookId)
+            .then(() => alert('Request Sent!'))
+            .then(() => {window.location.assign('/bookswap/profile');
+        });
+    }
+
+    createRequest() {
+        if(this.state.userId) {
+            this.requestService.createRequest(this.state.bookTitle, this.state.text, this.state.profileUserId, this.state.userId)
+                .then(this.addBookToUser());
+        } else {
+            alert('must be logged in to subimt a request');
+        }
     }
 
     deleteUser(userId) {
@@ -68,7 +109,39 @@ class PublicProfile extends React.Component {
     renderProfileType() {
         if(this.state.profileType === 'giver') {
             return (
+                <div>
+                <h3>Request a Book</h3>
+                    <form>
+                        <div className="form-group">
+                            <input
+                                onChange={this.setFirstName}
+                                className="form-control"
+                                id="exampleFormControlInput1"
+                                placeholder="Name"/>
+                        </div>
+                        <div className="form-group">
+                            <input
+                                onChange={this.setBookTitle}
+                                className="form-control"
+                                id="exampleFormControlInput1"
+                                placeholder="Book Request"/>
+                        </div>
+                        <div className="form-group">
+                            <textarea
+                                onChange={this.setMessage}
+                                placeholder="Message"
+                                className="form-control"
+                                id="exampleFormControlTextarea1"
+                                rows="3"></textarea>
+                        </div>
+                        <button
+                            onClick={this.createRequest}
+                            type="button"
+                            className="btn btn-primary btn-block">Request Book</button>
+                    </form>
+                    <br/>
                 <h3>Books Owned</h3>
+                </div>
             )
         } else if (this.state.profileType === 'receiver') {
             return (
@@ -122,6 +195,7 @@ class PublicProfile extends React.Component {
                         </div>
                     </div>
                 </form>
+                <br/>
                 {this.renderProfileType()}
                 {this.renderBooks()}
                 {this.renderAdminProfile()}

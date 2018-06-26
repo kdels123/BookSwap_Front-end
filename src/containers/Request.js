@@ -30,12 +30,6 @@ class Request extends React.Component {
         console.log(this.state.books);
     }
 
-    addBookToUser() {
-        this.bookUserService.addBookToUser(this.state.userId, this.state.bookId).then(() => {
-            window.location.assign('/bookswap/profile');
-        });
-    }
-
     renderListOfUsers() {
         let data = null;
         if (this.state.users) {
@@ -45,15 +39,12 @@ class Request extends React.Component {
                         <li className="list-group-item d-flex justify-content-between align-items-center"
                             id="resultItem"
                             key={i}>
-                            <Link
-                                to={{pathname: '/bookswap/user/'+ user.id + '/profile',
-                                    state: { userId: user.id}
-                                }}>{user.username} [{user.city}, {user.state}]</Link>
+                            {user.username} [{user.city}, {user.state}]
 
-                            <button
-                                onClick={() => this.addBookToUser()}
-                                type="button"
-                                className="btn btn-success float-right">Request</button>
+                            <Link to={{pathname: '/bookswap/user/'+ user.id + '/profile',
+                                state: { userId: user.id, bookId: this.state.bookId}}}
+                                // onClick={() => this.addBookToUser()}
+                                className="btn btn-success float-right">Request</Link>
                         </li>
                     )});
         }
