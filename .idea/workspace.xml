@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5f64ec33-186d-4b7f-84e8-18437fb8e04d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/containers/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/AdminService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/AdminService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/BookService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BookService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/BookUserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BookUserService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/GiverService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/GiverService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ReceiverService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ReceiverService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/RequestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/RequestService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ReviewService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ReviewService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/UserService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,6 +16,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Profile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/Profile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="548">
+              <caret line="175" column="85" selection-start-line="175" selection-start-column="85" selection-end-line="175" selection-end-column="85" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="RequestService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/RequestService.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,11 +46,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserService.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
+      <file leaf-file-name="Register.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/Register.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="66" column="68" selection-start-line="66" selection-start-column="68" selection-end-line="66" selection-end-column="68" />
+            <state relative-caret-position="99">
+              <caret line="57" column="13" lean-forward="true" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,7 +106,6 @@
         <option value="$PROJECT_DIR$/src/containers/ViewUsers.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/containers/Users.js" />
-        <option value="$PROJECT_DIR$/src/containers/Profile.js" />
         <option value="$PROJECT_DIR$/src/services/AdminService.js" />
         <option value="$PROJECT_DIR$/src/services/BookService.js" />
         <option value="$PROJECT_DIR$/src/services/BookUserService.js" />
@@ -108,6 +114,7 @@
         <option value="$PROJECT_DIR$/src/services/RequestService.js" />
         <option value="$PROJECT_DIR$/src/services/ReviewService.js" />
         <option value="$PROJECT_DIR$/src/services/UserService.js" />
+        <option value="$PROJECT_DIR$/src/containers/Profile.js" />
       </list>
     </option>
   </component>
@@ -221,12 +228,12 @@
       <workItem from="1529440728868" duration="8126000" />
       <workItem from="1529495070890" duration="59000" />
       <workItem from="1529614325138" duration="44462000" />
-      <workItem from="1529883486293" duration="31996000" />
+      <workItem from="1529883486293" duration="32448000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136831000" />
+    <option name="totallyTimeSpent" value="137283000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -441,16 +448,6 @@
     <entry file="file://$PROJECT_DIR$/src/containers/TitleSearch.js" />
     <entry file="file://$PROJECT_DIR$/src/components/ResultRow.js" />
     <entry file="file://$PROJECT_DIR$/src/components/SearchResult.js" />
-    <entry file="file://$PROJECT_DIR$/src/containers/Register.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="73" column="59" selection-start-line="73" selection-start-column="59" selection-end-line="73" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/AdminResultDetail.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-147">
@@ -572,16 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/Profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2280">
-          <caret line="152" column="72" selection-start-line="152" selection-start-column="72" selection-end-line="152" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/Users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -637,10 +624,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/ReviewService.js">
+    <entry file="file://$PROJECT_DIR$/src/containers/Register.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="37" selection-start-line="1" selection-end-line="2" />
+        <state relative-caret-position="99">
+          <caret line="57" column="13" lean-forward="true" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -648,6 +638,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="66" column="68" selection-start-line="66" selection-start-column="68" selection-end-line="66" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/ReviewService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="37" selection-start-line="1" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/Profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="175" column="85" selection-start-line="175" selection-start-column="85" selection-end-line="175" selection-end-column="85" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

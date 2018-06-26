@@ -137,6 +137,10 @@ class Profile extends React.Component {
             .then(() => this.findAllBooksForUser());
     }
 
+    deleteReview(reviewId) {
+        this.reviewService.deleteReview(reviewId).then(() => this.findAllReviewsForUser());
+    }
+
     renderListOfBooks() {
         let data = null;
         if (this.state.books) {
@@ -170,6 +174,10 @@ class Profile extends React.Component {
                                 <p className="float-right">{review.date}</p>
                                 <p>Review Title: {review.title}, By: {review.username}</p>
                                 <p>Review Description: {review.description}</p>
+                                <button
+                                    onClick={() => this.deleteReview(review.id)}
+                                    type="button"
+                                    className="btn btn-danger btn-sm">Remove</button>
                             </li>
                         )
                     }
