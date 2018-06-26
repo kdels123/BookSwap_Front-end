@@ -1,6 +1,7 @@
 import React from 'react'
 import UserService from "../services/UserService";
 import BookUserService from '../services/BookUserService';
+import ReviewService from '../services/ReviewService';
 import { Link } from 'react-router-dom'
 
 
@@ -17,7 +18,8 @@ class Profile extends React.Component {
             address: '',
             city: '',
             state: '',
-            books: []
+            books: [],
+            reviews: []
         };
 
         this.setFirstName = this.setFirstName.bind(this);
@@ -31,6 +33,7 @@ class Profile extends React.Component {
         this.logout = this.logout.bind(this);
         this.userService = UserService.instance;
         this.bookUserService = BookUserService.instance;
+        this.reviewService = ReviewService.instance;
     }
 
     setUser(user) {
@@ -47,7 +50,9 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        this.userService.profile().then((user) => {this.setUser(user)}).then(() => this.findAllBooksForUser(this.state.userId))
+        this.userService.profile().then((user) => {this.setUser(user)})
+            .then(() => this.findAllBooksForUser(this.state.userId))
+            .then(() => this.findAllReviewsForUser(this.state.userId))
 
     }
 
@@ -95,7 +100,10 @@ class Profile extends React.Component {
 
     findAllBooksForUser() {
         this.bookUserService.findAllBooksForUser(this.state.userId).then((books) => {this.setState({books: books})});
-        console.log(this.state.books);
+    }
+
+    findAllReviewsForUser() {
+        this.reviewService.findAllReviewsForUser(this.state.userId).then((reviews) => {this.setState({reviews: reviews})});
     }
 
     renderProfileType() {
@@ -112,6 +120,14 @@ class Profile extends React.Component {
                 <Link
                     className="btn btn-block btn-primary"
                     to={{pathname: '/bookswap/users'}}>View All Users</Link>
+            )
+        }
+    }
+
+    renderProfileTypeReviews() {
+        if(this.state.userType === 'giver' || this.state.userType === 'receiver') {
+            return (
+                <h3>Reviews You Wrote</h3>
             )
         }
     }
@@ -141,6 +157,25 @@ class Profile extends React.Component {
         return (
             data
         )
+    }
+
+    renderReviews() {
+        let data = null;
+            if (this.state.reviews) {
+                data = this.state.reviews.map(
+                    (review, i) => {
+                        return (
+                            <li className="list-group-item" id="resultItem"
+                                key={i}>
+                                <p className="float-right">{review.date}</p>
+                                <p>Review Title: {review.title}, By: {review.username}</p>
+                                <p>Review Description: {review.description}</p>
+                            </li>
+                        )
+                    }
+                )
+            }
+        return (data)
     }
 
     render() {
@@ -241,6 +276,9 @@ class Profile extends React.Component {
                 </form>
                 {this.renderProfileType()}
                 {this.renderListOfBooks()}
+                <br/>
+                {this.renderProfileTypeReviews()}
+                {this.renderReviews()}
             </div>
         )
     }

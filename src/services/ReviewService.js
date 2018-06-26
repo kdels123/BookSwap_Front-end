@@ -32,6 +32,12 @@ export default class UserService {
         })
     }
 
+    findAllReviewsForUser(userId) {
+        return fetch('http://localhost:8080/api/user/' + userId + '/review')
+            .then(function (response) { return response.json();
+            })
+    }
+
     static get instance() {
         if(!this[_singleton])
             this[_singleton] = new UserService(_singleton);
