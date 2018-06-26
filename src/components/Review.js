@@ -69,7 +69,7 @@ class Review extends React.Component {
             const date = month + '/' + this.state.date.getDate() + '/' + this.state.date.getFullYear()
             this.reviewService.createReview(
                 this.state.title, this.state.description, date, this.state.username, this.state.book.id, this.state.userId)
-                .then(this.findAllReviewsForBook(this.state.book.id));
+                .then(() => this.findAllReviewsForBook(this.state.book.id));
         } else {
             alert('Must be logged in to write review')
         }
