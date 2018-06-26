@@ -1,5 +1,5 @@
-const USER_API_LOCAL = 'http://localhost:8080/api/user';
-// const USER_API_REMOTE = 'https://webdev-summer1-2018-delsener.herokuapp.com/api/course/CID/module';
+// const USER_API_LOCAL = 'http://localhost:8080/api/user';
+const URL = 'https://cs5610-project-kdelsener.herokuapp.com/api/user';
 
 let _singleton = Symbol();
 export default class UserService {
@@ -9,7 +9,7 @@ export default class UserService {
     }
 
     login(username, password) {
-        return fetch (USER_API_LOCAL + '/login', {
+        return fetch (URL + '/login', {
             method: 'post',
             body: JSON.stringify({username: username, password: password}),
             credentials: 'same-origin',
@@ -22,7 +22,7 @@ export default class UserService {
     }
 
     updateUser(user) {
-        return fetch (USER_API_LOCAL + '/' + user.userId, {
+        return fetch (URL + '/' + user.userId, {
             method: 'put',
             body: JSON.stringify(user),
             headers: {
@@ -34,7 +34,7 @@ export default class UserService {
     }
 
     deleteUser(userId) {
-        return fetch(USER_API_LOCAL + '/' + userId, {
+        return fetch(URL + '/' + userId, {
             method: 'delete'
         }).then(function (response) {
             return response;
@@ -42,19 +42,19 @@ export default class UserService {
     }
 
     findUserById(userId) {
-        return fetch(USER_API_LOCAL + '/' + userId).then(function (response) {
+        return fetch(URL + '/' + userId).then(function (response) {
                 return response.json();
         })
     }
 
     findAllUsers() {
-        return fetch(USER_API_LOCAL + 's').then(function (response) {
+        return fetch(URL + 's').then(function (response) {
             return response.json();
         })
     }
 
     profile() {
-        return fetch('http://localhost:8080/api/profile',
+        return fetch('https://cs5610-project-kdelsener.herokuapp.com/api/profile',
             {
                 credentials: 'same-origin',
             })
@@ -64,7 +64,7 @@ export default class UserService {
     }
 
     review() {
-        return fetch('http://localhost:8080/api/user/review',
+        return fetch('https://cs5610-project-kdelsener.herokuapp.com/api/user/review',
             {
                 credentials: 'same-origin',
             })
@@ -74,7 +74,7 @@ export default class UserService {
     }
 
     logout() {
-        return fetch(USER_API_LOCAL + '/logout', {
+        return fetch(URL + '/logout', {
             method: 'post',
             credentials: 'same-origin'
         }).then(function (response) {

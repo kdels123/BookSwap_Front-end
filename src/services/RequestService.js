@@ -1,4 +1,6 @@
-const BOOK_USER_API_LOCAL = 'http://localhost:8080/api/giver/GID/receiver/RID';
+// const BOOK_USER_API_LOCAL = 'http://localhost:8080/api/giver/GID/receiver/RID';
+const URL = 'https://cs5610-project-kdelsener.herokuapp.com/api/giver/GID/receiver/RID';
+
 
 let _singleton = Symbol();
 export default class RequestService {
@@ -9,7 +11,7 @@ export default class RequestService {
     }
 
     createRequest(bookTitle, text, giverId, receiverId) {
-        return fetch(BOOK_USER_API_LOCAL.replace('GID', giverId).replace('RID', receiverId), {
+        return fetch(URL.replace('GID', giverId).replace('RID', receiverId), {
             method: 'post',
             body: JSON.stringify({bookTitle: bookTitle, text: text, giverId: giverId, receiverId: receiverId}),
             headers: {

@@ -1,5 +1,5 @@
-const REVIEW_API_LOCAL = 'http://localhost:8080/api/review';
-// const USER_API_REMOTE = 'https://webdev-summer1-2018-delsener.herokuapp.com/api/course/CID/module';
+// const REVIEW_API_LOCAL = 'http://localhost:8080/api/review';
+const URL = 'https://cs5610-project-kdelsener.herokuapp.com/api/review';
 
 let _singleton = Symbol();
 export default class UserService {
@@ -9,7 +9,7 @@ export default class UserService {
     }
 
     createReview(reviewTitle, reviewDescription, reviewDate, username, bookId, userId) {
-        return fetch('http://localhost:8080/api/book/' + bookId +'/user/' + userId + '/review', {
+        return fetch('https://cs5610-project-kdelsener.herokuapp.com/api/book/' + bookId +'/user/' + userId + '/review', {
             method: 'post',
             body: JSON.stringify({title: reviewTitle, description: reviewDescription, date: reviewDate, username: username, userId: userId}),
             headers: { 'Content-Type': 'application/json' },
@@ -19,7 +19,7 @@ export default class UserService {
     }
 
     deleteReview(reviewId) {
-        return fetch(REVIEW_API_LOCAL + '/' + reviewId, {
+        return fetch(URL + '/' + reviewId, {
             method: 'delete'
         }).then(function (response) {
             return response;
@@ -27,13 +27,13 @@ export default class UserService {
     }
 
     findAllReviewsForBook(bookId) {
-        return fetch('http://localhost:8080/api/book/' + bookId + '/review')
+        return fetch('https://cs5610-project-kdelsener.herokuapp.com/api/book/' + bookId + '/review')
             .then(function (response) { return response.json();
         })
     }
 
     findAllReviewsForUser(userId) {
-        return fetch('http://localhost:8080/api/user/' + userId + '/review')
+        return fetch('https://cs5610-project-kdelsener.herokuapp.com/api/user/' + userId + '/review')
             .then(function (response) { return response.json();
             })
     }

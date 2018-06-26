@@ -1,4 +1,5 @@
-const BOOK_API_LOCAL = 'http://localhost:8080/api/book'
+// const BOOK_API_LOCAL = 'http://localhost:8080/api/book';
+const URL = 'https://cs5610-project-kdelsener.herokuapp.com/api/book';
 
 let _singleton = Symbol();
 export default class BookService {
@@ -8,7 +9,7 @@ export default class BookService {
     }
 
     addBook(bookId, bookTitle, bookAuthor) {
-        return fetch(BOOK_API_LOCAL, {
+        return fetch(URL, {
             method: 'post',
             body: JSON.stringify({bookId: bookId, title: bookTitle, author: bookAuthor}),
             headers: {
